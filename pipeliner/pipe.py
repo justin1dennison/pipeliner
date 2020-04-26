@@ -18,8 +18,8 @@ class Pipe:
 
 
 def pipeliner(operator):
-    if operator not in {">>", "|"}:
-        raise TypeError(f"Operator can be either '>>' or '|'")
+    if operator not in {">>", "|", "^"}:
+        raise TypeError(f"Operator can be either '>>', '^' or '|'")
 
     def decorator(func):
         return Pipe(func)
