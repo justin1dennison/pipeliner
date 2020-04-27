@@ -1,10 +1,6 @@
 from functools import partial
 
 
-def call(obj, other):
-    return obj(other)
-
-
 class Pipe:
     def __init__(self, func):
         self.func = func
@@ -12,7 +8,8 @@ class Pipe:
     def __call__(self, *args, **kwargs):
         return self.func(*args, **kwargs)
 
-    __rrshift__ = __ror__ = __rxor__ = call
+
+_methods = {">>": "__rrshift__", "|": "__ror__", "^": "__rxor__"}
 
 
 def pipeliner(operator):
@@ -20,6 +17,8 @@ def pipeliner(operator):
         raise TypeError(f"Operator can be either '>>', '^' or '|'")
 
     def decorator(func):
+        method = _methods[operator]
+        setattr(Pipe, method, Pipe.__call__)
         return Pipe(func)
 
     return decorator
