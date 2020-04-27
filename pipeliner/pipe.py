@@ -12,9 +12,7 @@ class Pipe:
     def __call__(self, *args, **kwargs):
         return self.func(*args, **kwargs)
 
-    __rrshift__ = call
-    __ror__ = __rrshift__
-    __rxor__ = __rrshift__
+    __rrshift__ = __ror__ = __rxor__ = call
 
 
 def pipeliner(operator):
