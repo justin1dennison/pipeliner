@@ -11,11 +11,11 @@ from pipeliner import pipeliner
 def square(x):
     return x * x
 
-@pipeliner(">>"):
+@pipeliner(">>")
 def inc(x):
     return x + 1
 
-@pipeliner(">>"):
+@pipeliner(">>")
 def cube(x):
     return x ** 3
 
